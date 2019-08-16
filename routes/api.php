@@ -70,7 +70,7 @@ Route::group([
     'prefix' => 'pay'
 ], function ($router) {
     Route::get('index','PayController@index');
-    Route::post('notify','PayController@notify');
+    Route::any('notify','PayController@notify');
     Route::get('return','PayController@return');
 });
 

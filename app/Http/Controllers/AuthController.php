@@ -29,7 +29,7 @@ class AuthController extends Controller
     {
         $credentials = request(['name', 'password']);
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Unauthorized','status'=>'error','message'=>"用户名或密码错误"]);
         }
         $id = DB::table('users')->where('name',$credentials['name'])->value('id');
         return response()->json([
@@ -39,7 +39,7 @@ class AuthController extends Controller
             'id' => $id,
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
-        return response()->json(['name'=>$credentials['name']]);
+//        return response()->json(['name'=>$credentials['name']]);
 //        return $this->respondWithToken($token);
     }
 
